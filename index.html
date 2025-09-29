@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DhruvCall</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars initially */
+            background-color: #000; /* Black background for the intro */
+            font-family: Arial, sans-serif;
+            transition: background-color 1s;
+        }
+
+        /* --- Intro Animation Styling --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Black background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; /* Keep it on top */
+            opacity: 1;
+            transition: opacity 1s ease-in-out, transform 1s;
+        }
+
+        #intro-text {
+            color: #fff; /* White text */
+            font-size: 5vw; /* Responsive font size */
+            letter-spacing: -0.1em;
+            opacity: 0;
+            animation: textFadeIn 2s forwards 0.5s; /* Animation for the text */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Keyframe animation for the text to fade in and stretch slightly */
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+                letter-spacing: 0.5em;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                letter-spacing: 0.1em;
+            }
+        }
+
+        /* --- Main Content Styling --- */
+        #main-content {
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Class to hide the intro */
+        .hide-intro {
+            opacity: 0 !important;
+            transform: scale(1.05); /* Optional: slight zoom out effect on exit */
+            pointer-events: none; /* Make it unclickable */
+        }
+
+        /* Class to show the main content */
+        .show-content {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <h1 id="intro-text">DhruvCall</h1>
+    </div>
+
+    <div id="main-content">
+        <iframe src="https://free.digitalsamba.com/W12moZ4bBe4fA6y" allow="camera; microphone; display-capture; autoplay" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const introScreen = document.getElementById('intro-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Set the duration for the animation (e.g., 3000ms = 3 seconds)
+            const animationDuration = 3000; 
+
+            // After the animation duration, hide the intro and show the content
+            setTimeout(() => {
+                // 1. Start fading out the intro
+                introScreen.classList.add('hide-intro');
+                
+                // 2. Wait for the fade-out transition to complete (1 second in CSS)
+                setTimeout(() => {
+                    // 3. Make the intro invisible and non-interactive
+                    introScreen.style.display = 'none';
+                    // 4. Show the main content (iframe) with a fade-in effect
+                    mainContent.classList.add('show-content');
+                    // 5. Allow scrolling again if needed (though the iframe might handle its own)
+                    document.body.style.overflow = 'auto';
+                    document.body.style.backgroundColor = '#fff'; // Change background for the main content
+                }, 1000); // Wait for the CSS transition (1s) to finish
+                
+            }, animationDuration);
+        });
+    </script>
+
+</body>
+</html>
